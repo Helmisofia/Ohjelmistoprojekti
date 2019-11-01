@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Sportslist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>Edit sport on the list</h2>
+	<div>
+	<form action="#" th:action="@{save}"  th:object= ${sport} method="post">
+	<input type="hidden" th:field="${sport.id}" class="form-control"/>
+	<p>Sport: <input type="text" th:field="${sport.exercise}" /></p>
+	<p>Place: <input type="text" th:field="${sport.place}"/></p>
+	<p>Date: <input type="text" th:field="${sport.date}" /></p>
+	<p>Time: <input type="text" th:field="${sport.hours}" /></p>
+	
+<label for="actlist">Action</label> 
+<select id="actlist" th:field="*{action}" class="form-control">
+<option th:each="action: ${actions}" th:value="${action.actionid}" th:text="${action.name}">
+</option>
+</select>
+
+	<input type="submit" value="Submit" /> 
+	</form>
+</div>
+	
+</body>
+</html>

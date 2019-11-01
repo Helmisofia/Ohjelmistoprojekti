@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<head>
+    <title>Sportslist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h1>Sports</h1>
+
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+
+<table class="table table-striped">
+<tr>
+<th>Sport</th>
+<th>Place</th>
+<th>Date</th>
+<th>Hours</th>
+<th>Action</th>
+<th></th>
+<th></th>
+</tr>
+
+<tr th:each="sport : ${sports}">
+	<td th:text=${sport.exercise}></td>
+	<td th:text=${sport.place}></td>
+	<td th:text=${sport.date}></td>
+	<td th:text=${sport.hours}></td>
+	<td th:text=${sport.action.name}></td>
+	<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${sport.id})}">Delete</a></td>
+	<td><a class="btn btn-warning" th:href="@{/editsport/{id}(id=${sport.id})}">Edit</a></td> 
+</tr>
+
+</table>
+	 <a class="btn btn-success" href="/addsport">Add Sport</a>    	
+
+</body>
+</html>
