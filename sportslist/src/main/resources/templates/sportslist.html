@@ -7,23 +7,29 @@
 </head>
 <body>
 
-<h1>Sports</h1>
+<h1>Keep track on your exercises!</h1>
 
 	<div class="col-md-4">
-		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]] ! Have fun working out!</h3>
 	</div>
 	<div class="col-md-4" style="padding:20px 0">
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
 		</form>
 	</div>
+	<div>
+	<form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="post">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchCriteria">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+	</div>
 
 <table class="table table-striped">
 <tr>
-<th>Sport</th>
+<th>Exercise</th>
 <th>Place</th>
 <th>Date</th>
-<th>Hours</th>
+<th>Minutes</th>
 <th>Action</th>
 <th></th>
 <th></th>
@@ -33,7 +39,7 @@
 	<td th:text=${sport.exercise}></td>
 	<td th:text=${sport.place}></td>
 	<td th:text=${sport.date}></td>
-	<td th:text=${sport.hours}></td>
+	<td th:text=${sport.minutes}></td>
 	<td th:text=${sport.action.name}></td>
 	<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${sport.id})}">Delete</a></td>
 	<td><a class="btn btn-warning" th:href="@{/editsport/{id}(id=${sport.id})}">Edit</a></td> 

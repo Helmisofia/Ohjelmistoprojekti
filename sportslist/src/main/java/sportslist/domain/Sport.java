@@ -17,7 +17,7 @@ public class Sport {
 	private String place;
 	private String exercise;
 	private String date;
-	private int hours;
+	private int minutes;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -28,11 +28,11 @@ public class Sport {
 		
 	}
 
-	public Sport(String place, String exercise, String date, int hours, Action action) {
+	public Sport(String place, String exercise, String date, int minutes, Action action) {
 		this.place = place;
 		this.exercise = exercise;
 		this.date = date;
-		this.hours = hours;
+		this.minutes = minutes;
 		this.action = action;
 	}
 	
@@ -68,12 +68,12 @@ public class Sport {
 		this.date = date;
 	}
 
-	public int getHours() {
-		return hours;
+	public int getMinutes() {
+		return minutes;
 	}
 
-	public void setHours(int hours) {
-		this.hours = hours;
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
 	}
 
 	public Action getAction() {
@@ -87,9 +87,9 @@ public class Sport {
 	@Override
 	public String toString() {
 		if (this.action != null)
-			return "Sport [id=" + id + ", place=" + place + ", exercise=" + exercise + ", date=" + date + ", hours=" + hours + ", action=" + action + "]";
+			return "Sport [id=" + id + ", place=" + place + ", exercise=" + exercise + ", date=" + date + ", minutes=" + minutes + ", action=" + action + "]";
 		else
-			return "Sport [id=" + id + ", place=" + place + ", exercise=" + exercise + ", date=" + date + ", hours=" + hours +"]";
+			return "Sport [id=" + id + ", place=" + place + ", exercise=" + exercise + ", date=" + date + ", minutes=" + minutes +"]";
 	}
 	
 	

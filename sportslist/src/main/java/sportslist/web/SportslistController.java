@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sportslist.domain.ActionRepository;
@@ -37,7 +38,7 @@ public class SportslistController {
     }	
 	
 	@RequestMapping(value = {"/", "/sportslist"})	
-	public String getBookList(Model model) {
+	public String getSportsList(Model model) {
 
 		List<Sport> sports = (List<Sport>) repository.findAll();
 		
@@ -47,17 +48,24 @@ public class SportslistController {
 				
 	}
 	
-	// RESTful service to get all students
     @RequestMapping(value="/sports", method = RequestMethod.GET)
     public @ResponseBody List<Sport> sportListRest() {	
         return (List<Sport>) repository.findAll();
     }    
 
-	// RESTful service to get student by id
     @RequestMapping(value="/sport/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Sport> findSportRest(@PathVariable("id") Long sportId) {	
     	return repository.findById(sportId);
-    }       
+    }
+    
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String searchSport(@RequestParam(value="searchCriteria") String searchCriteria, Model model){
+        List<Sport> sports = repository.findByPlaceContainingOrExerciseContainingAllIgnoreCase(searchCriteria, searchCriteria);
+		model.addAttribute("sports", sports);
+
+		return "sportslist";
+    }     
+    
 	
     @RequestMapping(value = "/addsport")
     public String addSport(Model model){
@@ -90,10 +98,8 @@ public class SportslistController {
 	@RequestMapping(value = "/delete/{id}")	
 	public String deleteSport(@PathVariable("id") Long sportId) {
 
-		// First delete book by its id.
 		repository.deleteById(sportId);
 		
-		// Then reload the remaining books.
 		return "redirect:../sportslist";
 
 	}
